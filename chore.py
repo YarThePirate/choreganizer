@@ -1,8 +1,6 @@
-from collections import namedtuple
 from datetime import date, timedelta
+from completion import Completion
 import json
-
-Completion = namedtuple('Completion', 'person day')
 
 class Chore:
     def __init__(self, title, frequency):
