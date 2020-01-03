@@ -48,6 +48,8 @@ class Chore:
             #   history is empty
             return date.today() + self.get_delta_from_string(self.frequency)
 
+    def get_next_due_date_string(self):
+        return f"{self.get_next_due_date()}"
+
     def toJSON(self):
         return json.dumps(self.__dict__)
-
