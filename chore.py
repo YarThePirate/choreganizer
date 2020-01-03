@@ -1,16 +1,17 @@
 from collections import namedtuple
 from datetime import date, timedelta
+import json
 
 Completion = namedtuple('Completion', 'person day')
 
 class Chore:
     def __init__(self, title, frequency):
         self.title = title
-        self.frequency = self.get_delta_from_string(frequency)
+        self.frequency = frequency
         self.history = []
 
     def mark_completed(self, person):
-        self.history.append(Completion(person, date.today()))
+        self.history.append(Completion(person, date.today().isoformat()))
 
     def get_last_completed_string(self):
         if self.history:
@@ -42,10 +43,13 @@ class Chore:
     
     def get_next_due_date(self):
         if self.history:
-            return self.history[-1].day + self.frequency
+            return date.fromisoformat(self.history[-1].day) + self.get_delta_from_string(self.frequency)
         else:
             # Not sure I like this.
             # TODO: Figure out a better way to handle next due date when
             #   history is empty
-            return date.today() + self.frequency
+            return date.today() + self.get_delta_from_string(self.frequency)
+
+    def toJSON(self):
+        return json.dumps(self.__dict__)
 
