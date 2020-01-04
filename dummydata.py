@@ -11,9 +11,9 @@ dummy_chore.history.append(Completion("Bob", "2019-12-30"))
 
 garbage = Chore("Take Out Garbage", "weekly")
 garbage.history = [
-    Completion("Alice", "2020-12-11"),
-    Completion("Bob", "2020-12-18"),
-    Completion("Alice", "2020-12-24"),
+    Completion("Alice", "2019-12-11"),
+    Completion("Bob", "2019-12-18"),
+    Completion("Alice", "2019-12-24"),
     Completion("Alice", "2020-01-01")  # End Chore 0: index 3
 ]
 
