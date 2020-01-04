@@ -2,6 +2,8 @@ import unittest
 from datetime import date, timedelta
 
 from chore import *
+from server import Scheduler
+from dummydata import *
 
 class ChoreTestMethods(unittest.TestCase):
 
@@ -36,6 +38,24 @@ class ChoreTestMethods(unittest.TestCase):
 
         self.assertEqual(with_history, "2020-01-06")
         self.assertEqual(without_history, f"{today_plus_one_week}")
+
+    def test_returns_correct_completion_count(self)
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!
+        # TODO: Implement this test and method!
+        self.assertTrue(False)
+
+
+class SchedulerTests(unittest.TestCase):
+
+    def test_scheduler_loads_data_correctly(self):
+        self.assertTrue(dummy_scheduler.chores is dummy_chores)
+        self.assertEqual(len(dummy_scheduler.chores[0].history), 4)
+    
+    def test_scheduler_returns_correct_chores_due(self):
+        self.assertEqual(dummy_scheduler.get_chores_due(), ["Litter Boxes"])
+        hold = dummy_scheduler.chores[2].history.pop()
+        self.assertEqual(dummy_scheduler.get_chores_due(), ["Litter Boxes", "Buy Dog Food"])
+        dummy_scheduler.chores[2].history.append(hold)
 
 if __name__ == "__main__":
     unittest.main()

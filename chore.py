@@ -51,5 +51,13 @@ class Chore:
     def get_next_due_date_string(self):
         return f"{self.get_next_due_date()}"
 
+    def get_completed_by_tally(self):
+        # !!!!!!!!!!!!!!!!!!!!!!!
+        # TODO: Implement me!
+        # Should return a list of tuples for the completer's names and the
+        # number of times they have completed the task.
+        # e.g. [("Alice", 3), ("Bob", 1)]
+        return
+
     def toJSON(self):
         return json.dumps(self.__dict__)
