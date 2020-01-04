@@ -39,10 +39,21 @@ class ChoreTestMethods(unittest.TestCase):
         self.assertEqual(with_history, "2020-01-06")
         self.assertEqual(without_history, f"{today_plus_one_week}")
 
-    def test_returns_correct_completion_count(self)
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!
-        # TODO: Implement this test and method!
-        self.assertTrue(False)
+    def test_returns_correct_completion_tally_for_person(self):
+        self.assertEqual(garbage.get_completed_tally_for("Alice"), 3)
+        self.assertEqual(garbage.get_completed_tally_for("Bob"), 1)
+    
+    def test_returns_correct_date_last_completed_by_person(self):
+        self.assertEqual(garbage.get_date_last_completed_by("Alice"), "2020-01-01")
+        self.assertEqual(garbage.get_date_last_completed_by("Bob"), "2019-12-18")
+
+    def test_returns_correct_completion_tallies(self):
+        garbage_totals = { "Alice": 3, "Bob": 1 }
+        litter_totals = { "Bob": 5 }
+        dog_food_totals = { "Alice": 2, "Bob": 1 }
+        self.assertEqual(garbage.get_completed_by_tallies(), garbage_totals)
+        self.assertEqual(litter.get_completed_by_tallies(), litter_totals)
+        self.assertEqual(dog_food.get_completed_by_tallies(), dog_food_totals)
 
 
 class SchedulerTests(unittest.TestCase):

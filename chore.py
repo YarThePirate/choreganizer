@@ -51,13 +51,28 @@ class Chore:
     def get_next_due_date_string(self):
         return f"{self.get_next_due_date()}"
 
-    def get_completed_by_tally(self):
+    def get_completed_by_tallies(self):
         # !!!!!!!!!!!!!!!!!!!!!!!
         # TODO: Implement me!
-        # Should return a list of tuples for the completer's names and the
-        # number of times they have completed the task.
-        # e.g. [("Alice", 3), ("Bob", 1)]
-        return
+        # Should return a dict with the completer's names as keys and the
+        # number of times they have completed the task as the values.
+        # e.g. { "Alice": 3, "Bob": 1 }
+        totals = {}
+        for completion in self.history:
+            person = completion.person
+            if person in totals:
+                totals[person] += 1
+            else:
+                totals[person] = 1
+        return totals
+    
+    def get_completed_tally_for(self, person):
+        return len(list(filter(lambda x: x.person is person, self.history)))
+
+    def get_date_last_completed_by(self, person):
+        done = list(filter(lambda x: x.person is person, self.history))
+        done.sort(key=lambda x: date.fromisoformat(x.day))
+        return done[-1].day
 
     def toJSON(self):
         return json.dumps(self.__dict__)
