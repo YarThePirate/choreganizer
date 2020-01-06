@@ -55,6 +55,13 @@ class ChoreTestMethods(unittest.TestCase):
         self.assertEqual(litter.get_completed_by_tallies(), litter_totals)
         self.assertEqual(dog_food.get_completed_by_tallies(), dog_food_totals)
 
+    def test_returns_correct_next_due_date_set_day(self):
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        # TODO: Implement this!
+        #test = Chore("Test", "weekly", 2) # 2 is "Wednesday"
+        #test.get
+        self.assertTrue(False)
+
 
 class SchedulerTests(unittest.TestCase):
 

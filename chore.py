@@ -1,12 +1,15 @@
 from datetime import date, timedelta
 from completion import Completion
+from calendar import day_name
 import json
 
 class Chore:
-    def __init__(self, title, frequency):
+    def __init__(self, title, frequency, day_of_week=None):
         self.title = title
         self.frequency = frequency
         self.history = []
+        if day_of_week:
+            self.day_of_week = day_of_week
 
     def mark_completed(self, person):
         self.history.append(Completion(person, date.today().isoformat()))
@@ -40,6 +43,15 @@ class Chore:
             return self.history[-1].day
     
     def get_next_due_date(self):
+        if self.day_of_week:
+            # Assumes weekly frequency for right now
+            today = date.today().weekday()
+            if today > self.day_of_week:
+                days = 7 - (today - self.day_of_week)
+            else:
+                days = self.day_of_week - today
+            return date.today() + timedelta(days=days)
+            
         if self.history:
             return date.fromisoformat(self.history[-1].day) + self.get_delta_from_string(self.frequency)
         else:
@@ -52,9 +64,7 @@ class Chore:
         return f"{self.get_next_due_date()}"
 
     def get_completed_by_tallies(self):
-        # !!!!!!!!!!!!!!!!!!!!!!!
-        # TODO: Implement me!
-        # Should return a dict with the completer's names as keys and the
+        # Returns a dict with the completer's names as keys and the
         # number of times they have completed the task as the values.
         # e.g. { "Alice": 3, "Bob": 1 }
         totals = {}
